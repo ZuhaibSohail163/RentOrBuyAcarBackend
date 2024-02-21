@@ -3,14 +3,16 @@ const orderModel = require('../models/orderModel')
 const createOrder = async (req, res) => {
     try {
         const registerOrder = new orderModel({
+            officeLocation:req.body.officeLocation,
             car: req.body.car,
-            buyerType: req.body.buyerType,
-            buyer: req.body.buyer,
-            orderType: req.body.orderType,
-            startDate: req.body.startDate,
-            endDate: req.body.endDate,
-            price: req.body.price,
-            buyDate: req.body.buyDate
+            user: req.body.user,
+            paymentInfo: req.body.paymentInfo,
+            carRange: req.body.carRange,
+            paidAt: req.body.paidAt,
+            totalPrice: req.body.totalPrice,
+            orderStatus: req.body.orderStatus,
+            pickedAt: req.body.pickedAt,
+            returnedAt:req.body.returnedAt
         })
         registerOrder.save()
         res.status(201).json({

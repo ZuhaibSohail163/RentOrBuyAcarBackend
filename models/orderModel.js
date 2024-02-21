@@ -3,41 +3,59 @@ const userModel = require('./userModel');
 const carModel = require('./carModel');
 
 const orderSchema = new mongoose.Schema({
+
+    officeLocation: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "OfficeLocation",
+        required: true
+    },
     car: {
-        type: carModel,
-        ref: 'Car',
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Car",
         required: true
     },
-    buyerType: {
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true
+    },
+    paymentInfo: {
+        id: {
+            type: String,
+            required: true
+        },
+        status: {
+            type: String,
+            required: true
+        },
+    },
+    carRange: {
         type: String,
-        enum: ['business', 'client'],
         required: true
     },
-    buyer: {
-        type: userModel,
-        refPath: 'buyerType',
-        required: true
-    },
-    orderType: {
-        type: String,
-        enum: ['buy', 'rent'],
-        required: true
-    },
-    startDate: {
+    paidAt: {
         type: Date,
         required: true
     },
-    endDate: {
-        type: Date
+    totalPrice: {
+        type: Number,
+        required: true,
+        default: 0
     },
-    price: {
-        type: Number
+    orderStatus: {
+        type: String,
+        required: true,
+        default: "Processing",
     },
-    buyDate: {
-        type: Date
+    pickedAt: Date,
+    returnedAt: Date,
+},
+    {
+        timestamps: true,
+        toJSON: { virtuals: true },
     },
     // Add other relevant fields like price, payment status, etc.
-});
+);
 
 const OrderModel = mongoose.model('Order', orderSchema);
 
