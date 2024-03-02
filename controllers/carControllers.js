@@ -37,6 +37,14 @@ const getCars = async (req, res) => {
             msg: "internal server error",
             error
         })
+
+
+
+
+
+
+
+        
     }
 }
 
